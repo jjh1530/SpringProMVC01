@@ -6,4 +6,17 @@
 		SELECT * FROM tblboard 
 		ORDER BY boardGroup desc
 	</select>
+	
+	<insert id="insert" parameterType="kr.bit.entity.Board">
+		INSERT INTO 
+		   tblboard (idx, memID,title, content, writer,boardGroup, boardSequence, boardLevel, boardAvailable)
+		SELECT IFNULL(MAX(idx)+1, 1), #{memID}, #{title}, #{content}, #{writer},
+			   IFNULL(MAX(boardGroup)+1, 0),0,0,1
+		FROM tblBoard
+	</insert>
+	
+	<select id="login" resultType="kr.bit.entity.Member" parameterType="kr.bit.entity.Member">
+		SELECT * FROM tbl_member
+		WHERE memID=#{memID} AND memPwd= #{memPwd}
+	</select>
 </mapper>

@@ -1,5 +1,7 @@
 package kr.bit.entity;
 
+import java.util.Date;
+
 import lombok.Data;
 
 @Data
@@ -10,7 +12,7 @@ public class Board {
 		private String title;
 		private String content;
 		private String writer;
-		private String indate;
+		private Date indate;
 		private int count;
 		private int boardGroup;
 		private int boardSequence;
@@ -47,10 +49,11 @@ public class Board {
 		public void setWriter(String writer) {
 			this.writer = writer;
 		}
-		public String getIndate() {
+
+		public Date getIndate() {
 			return indate;
 		}
-		public void setIndate(String indate) {
+		public void setIndate(Date indate) {
 			this.indate = indate;
 		}
 		public int getCount() {

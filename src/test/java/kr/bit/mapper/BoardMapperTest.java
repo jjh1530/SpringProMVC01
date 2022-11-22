@@ -19,11 +19,23 @@ public class BoardMapperTest {
 	@Autowired
 	BoardMapper boardMapper;
 	
+	/*
 	@Test
 	public void testGetList() {
 		List<Board> list = boardMapper.getList();
 		for (Board vo : list) {
 			System.out.println(vo);
 		}
+	}*/
+	
+	@Test
+	public void testInsert() {
+		Board vo = new Board();
+		vo.setMemID("wogns");
+		vo.setTitle("제목");
+		vo.setContent("내용");
+		vo.setWriter("wogns");
+		boardMapper.insert(vo);
+		System.out.println(vo);
 	}
 }

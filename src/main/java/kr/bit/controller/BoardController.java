@@ -25,6 +25,12 @@ public class BoardController {
 		List<Board> list = boardService.getList();
 		model.addAttribute("list", list);
 		
-		return "board/boardList";
+		return "board/list";
+	}
+	
+	@GetMapping(value="/register")
+	public String register() {
+		
+		return "board/register";
 	}
 }
