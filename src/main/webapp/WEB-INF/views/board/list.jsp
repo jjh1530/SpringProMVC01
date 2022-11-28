@@ -16,10 +16,24 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script>
 	$(document).ready(function(){
+		var result = '${result}';
+		checkModal(result);		
+		
+		//글스기 버튼
 		$("#regBtn").click(function(){
 			location.href="/board/register";
 		});
 	});
+	
+	function checkModal(result) {
+		if (result =='') {
+			return;
+		}
+		if (parseInt(result)>0) {
+			$(".modal-body").html("게시글 " + parseInt(result) +"번이 등록되었습니다.");
+		}
+		$("#myModal").modal("show");
+	}
 </script>
 </head>
 <body>
@@ -63,7 +77,7 @@
 	    		<c:forEach var="vo" items="${list }">	
 	    			<tr>
 		    			<td>${vo.idx }</td>
-		    			<td>${vo.title }</td>
+		    			<td><a href="/board/get?idx=${vo.idx}">${vo.title }</a></td>
 		    			<td>${vo.writer }</td>
 		    			<td><fmt:formatDate pattern="yyyy-MM-dd" value="${vo.indate }"/></td>
 		    			<td>${vo.count }</td>
@@ -78,6 +92,28 @@
 	    		</c:if>
 	    		</thead>
 	    	</table>
+	    	<!-- 모달 -->
+	    	<div id="myModal" class="modal fade" role="dialog">
+			  <div class="modal-dialog">
+			
+			    <!-- Modal content-->
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal">&times;</button>
+			        <h4 class="modal-title">Modal Header</h4>
+			      </div>
+			      <div class="modal-body">
+			        <p>Some text in the modal.</p>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			      </div>
+			    </div>
+			
+			  </div>
+			</div>
+			<!-- 모달끝 -->
+			
 		</div>
 	    <div class="panel-footer">스프2탄(답변형 게시판)</div>
 	  </div>

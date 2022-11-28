@@ -21,23 +21,33 @@
 	  <div class="panel panel-default">
 	    <div class="panel-heading">Board</div>
 	    <div class="panel-body">
-			<form action="/board/register" method="post">
-				<input type="hidden" name="memID" value="${mvo.memID }">
-				<div class="form-group">
-					<label>제목</label>
-					<input type="text" name="title" id="title" class="form-control"/>
-				</div>
-				<div class="form-group">
-					<label>내용</label>
-					<textarea rows="10" name="content" id="content" class="form-control"></textarea>
-				</div>
-				<div class="form-group">
-					<label>작성자</label>
-					<input type="text" name="writer" id="writer" value="${mvo.memName }" readonly="readonly" class="form-control"/>
-				</div>
-				<button type="submit" class="btn btn-defualt btn-sm">등록</button>
-				<button type="reset" class="btn btn-warning btn-sm">취소</button>
-			</form>
+			<table class="table table-bordered table-hover">
+	    			<tr>
+		    			<td>번호</td>
+		    			<td>${vo.idx }</td>
+	    			</tr>
+	    			<tr>
+		    			<td>제목</td>
+		    			<td>${vo.title }</td>
+	    			</tr>
+	    			
+	    			<tr>
+		    			<td>내용</td>
+		    			<td><textarea rows="10" class="form-control" readonly="readonly">${vo.content }</textarea></td>
+	    			</tr>
+	    			<tr>
+		    			<td>작성자</td>
+		    			<td>${vo.writer }</td>
+	    			</tr>
+	    			<tr>
+	    				<td colspan="2" style="text-align:center;">
+	    					<button class="btn btn-sm btn-primary">답글</button>
+	    					<button class="btn btn-sm btn-success">수정</button>
+	    					<button class="btn btn-sm btn-warning">삭제</button>
+	    					<button class="btn btn-sm btn-info">목록</button>
+	    				</td>
+	    			</tr>
+	    	</table>
 		</div>
 	    <div class="panel-footer">스프2탄(답변형 게시판)</div>
 	  </div>

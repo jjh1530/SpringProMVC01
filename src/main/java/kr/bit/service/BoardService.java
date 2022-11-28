@@ -10,4 +10,10 @@ public interface BoardService {
 	public List<Board> getList();
 	
 	public Member login(Member vo);
+	
+	public void insert(Board vo);
+
+	public void insertSelectKey(Board vo);
+	
+	public Board read(int idx);
 }

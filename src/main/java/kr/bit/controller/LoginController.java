@@ -18,10 +18,7 @@ public class LoginController {
 	
 	@RequestMapping("/loginProcess")
 	public String login(Member vo, HttpSession session) {
-		System.out.println(vo.getMemID());
-		System.out.println(vo.getMemPwd()+"@@@@@@@@@@@@@@@@@");
 		Member mvo = boardService.login(vo);
-		System.out.println(mvo.getMemID());
 		if (mvo!= null) {//로그인 성공
 			session.setAttribute("mvo", mvo); // 객체바인딩
 		}

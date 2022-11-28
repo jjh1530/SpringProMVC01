@@ -3,20 +3,41 @@
 <mapper namespace="kr.bit.mapper.BoardMapper">
 
 	<select id="getList" resultType="kr.bit.entity.Board">
-		SELECT * FROM tblboard 
+		SELECT * FROM tblboard
 		ORDER BY boardGroup desc
 	</select>
-	
+
 	<insert id="insert" parameterType="kr.bit.entity.Board">
-		INSERT INTO 
-		   tblboard (idx, memID,title, content, writer,boardGroup, boardSequence, boardLevel, boardAvailable)
-		SELECT IFNULL(MAX(idx)+1, 1), #{memID}, #{title}, #{content}, #{writer},
-			   IFNULL(MAX(boardGroup)+1, 0),0,0,1
+		INSERT INTO
+		tblboard (idx, memID,title, content, writer,boardGroup, boardSequence,
+		boardLevel, boardAvailable)
+		SELECT IFNULL(MAX(idx)+1, 1), #{memID},
+		#{title}, #{content}, #{writer},
+		IFNULL(MAX(boardGroup)+1, 0),0,0,1
 		FROM tblBoard
 	</insert>
-	
-	<select id="login" resultType="kr.bit.entity.Member" parameterType="kr.bit.entity.Member">
+
+	<insert id="insertSelectKey" parameterType="kr.bit.entity.Board">
+		<selectKey keyProperty="idx,boardGroup"
+			resultType="kr.bit.entity.Board" order="BEFORE">
+			SELECT IFNULL(MAX(idx)+1, 1) as idx,
+					IFNULL(MAX(boardGroup)+1, 0) as boardGroup
+			FROM tblBoard
+		</selectKey>
+		INSERT INTO
+		tblboard (idx, memID,title, content, writer,boardGroup, boardSequence,
+		boardLevel, boardAvailable)
+		VALUES(#{idx}, #{memID},#{title}, #{content},#{writer}, #{boardGroup},0,0,1)
+	</insert>
+
+	<select id="login" resultType="kr.bit.entity.Member"
+		parameterType="kr.bit.entity.Member">
 		SELECT * FROM tbl_member
-		WHERE memID=#{memID} AND memPwd= #{memPwd}
+		WHERE memID=#{memID} AND memPwd=#{memPwd}
+	</select>
+	
+	<select id="read" resultType="kr.bit.entity.Board">
+		SELECT *
+		FROM tblBoard WHERE idx = #{idx}
 	</select>
 </mapper>

@@ -24,4 +24,19 @@ public class BoardServiceImpl implements BoardService{
 	public Member login(Member vo) {
 		return boardMapper.login(vo);
 	}
+	
+	@Override
+	public void insert(Board vo) {
+		boardMapper.insert(vo);
+	}
+	
+	@Override
+	public void insertSelectKey(Board vo) {
+		boardMapper.insertSelectKey(vo);
+	}
+	
+	@Override
+	public Board read(int idx) {
+		return boardMapper.read(idx);
+	}
 }
