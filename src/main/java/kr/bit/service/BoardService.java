@@ -16,4 +16,8 @@ public interface BoardService {
 	public void insertSelectKey(Board vo);
 	
 	public Board read(int idx);
+	
+	public void modify(Board vo);
+	
+	public void remove(int idx);
 }

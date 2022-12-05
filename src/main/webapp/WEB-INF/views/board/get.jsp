@@ -24,11 +24,11 @@
 			<table class="table table-bordered table-hover">
 	    			<tr>
 		    			<td>번호</td>
-		    			<td>${vo.idx }</td>
+		    			<td><input type="text" value="${vo.idx }" class="form-control" name="idx" readonly="readonly"/></td>
 	    			</tr>
 	    			<tr>
 		    			<td>제목</td>
-		    			<td>${vo.title }</td>
+		    			<td><input type="text" value="${vo.title }" class="form-control" name="idx" readonly="readonly"/></td>
 	    			</tr>
 	    			
 	    			<tr>
@@ -37,14 +37,20 @@
 	    			</tr>
 	    			<tr>
 		    			<td>작성자</td>
-		    			<td>${vo.writer }</td>
+		    			<td><input type="text" value="${vo.writer }" class="form-control" name="idx" readonly="readonly"/></td>
 	    			</tr>
 	    			<tr>
 	    				<td colspan="2" style="text-align:center;">
-	    					<button class="btn btn-sm btn-primary">답글</button>
-	    					<button class="btn btn-sm btn-success">수정</button>
-	    					<button class="btn btn-sm btn-warning">삭제</button>
-	    					<button class="btn btn-sm btn-info">목록</button>
+	    					<c:if test="${!empty mvo }">
+		    					<button class="btn btn-sm btn-primary">답글</button>
+		    					<button class="btn btn-sm btn-success" onclick="location.href='/board/modify?idx=${vo.idx}'">수정</button>
+		    				</c:if>
+		    				<c:if test="${empty mvo }">
+		    					<button disabled="disabled" class="btn btn-sm btn-primary">답글</button>
+		    					<button disabled="disabled" class="btn btn-sm btn-success" onclick="location.href='/board/modify?idx=${vo.idx}'">수정</button>
+		    				</c:if>
+		    				<button class="btn btn-sm btn-info" onclick="location.href='/board/list'">목록</button>
+	    				
 	    				</td>
 	    			</tr>
 	    	</table>

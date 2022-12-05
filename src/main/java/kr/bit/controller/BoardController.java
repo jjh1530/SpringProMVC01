@@ -50,4 +50,27 @@ public class BoardController {
 		model.addAttribute("vo", vo);
 		return "board/get";
 	}
+	
+	@GetMapping(value="/modify")
+	public String modify(int idx, Model model) {
+		
+		Board vo = boardService.read(idx);
+		model.addAttribute("vo", vo);
+		
+		return "board/modify";
+	}
+	
+	@PostMapping(value="/modify")
+	public String modeify(Board vo) {
+		
+		boardService.modify(vo);
+		
+		return"redirect:/board/list";
+	}
+	
+	@GetMapping(value="/remove")
+	public String remove(int idx) {
+		boardService.remove(idx);
+		return "redirect:/board/list";
+	}
 }

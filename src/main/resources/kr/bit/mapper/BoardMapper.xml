@@ -40,4 +40,12 @@
 		SELECT *
 		FROM tblBoard WHERE idx = #{idx}
 	</select>
+	
+	<update id="update" parameterType="kr.bit.entity.Board">
+		UPDATE tblBoard SET title=#{title}, content=#{content} WHERE idx =#{idx}
+	</update>
+	
+	<delete id="delete">
+		DELETE FROM tblBoard WHERE idx=#{idx}
+	</delete>
 </mapper>

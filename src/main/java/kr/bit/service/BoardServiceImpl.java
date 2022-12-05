@@ -39,4 +39,14 @@ public class BoardServiceImpl implements BoardService{
 	public Board read(int idx) {
 		return boardMapper.read(idx);
 	}
+	
+	@Override
+	public void modify(Board vo) {
+		boardMapper.update(vo);
+	}
+	
+	@Override
+	public void remove(int idx) {
+		boardMapper.delete(idx);
+	}
 }
