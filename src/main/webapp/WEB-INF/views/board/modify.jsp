@@ -29,12 +29,12 @@
 	    			</tr>
 	    			<tr>
 		    			<td>제목</td>
-		    			<td><input type="text" value="${vo.title }" class="form-control" name="title" /></td>
+		    			<td><input type="text" value="<c:out value='${vo.title }'/>" class="form-control" name="title" /></td>
 	    			</tr>
 	    			
 	    			<tr>
 		    			<td>내용</td>
-		    			<td><textarea rows="10" class="form-control" name="content">${vo.content }</textarea></td>
+		    			<td><textarea rows="10" class="form-control" name="content"><c:out value="${vo.content }"/></textarea></td>
 	    			</tr>
 	    			<tr>
 		    			<td>작성자</td>

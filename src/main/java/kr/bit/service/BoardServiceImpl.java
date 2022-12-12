@@ -49,4 +49,21 @@ public class BoardServiceImpl implements BoardService{
 	public void remove(int idx) {
 		boardMapper.delete(idx);
 	}
+	
+	@Override
+	public void reply(Board vo) {
+		// 답글
+		// 1. 원글의 정보 가져오기
+		Board parent = boardMapper.read(vo.getIdx());
+		// 2. 부모글의 boardGroup의 값 -> 답글(vo)에 저장
+		vo.setBoardGroup(parent.getBoardGroup());
+		// 3.부모글의 boardSequence의 값 1을 더해서 답글에 저장
+		vo.setBoardSequence(parent.getBoardSequence() +1);
+		// 4.부모글의 boardLevel 값 1을 더해서 답글에 저장
+		vo.setBoardLevel(parent.getBoardLevel() +1);
+		// 5. 같은 boardGroup에 있는 글중에서 부모글의 boardSequence 보다 큰 값들을 모두 1씩 증가
+		boardMapper.replySeqUpdate(parent);
+		//6. 답글 insert
+		boardMapper.replyInsert(vo);
+	}
 }

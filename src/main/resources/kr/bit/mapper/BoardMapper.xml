@@ -4,7 +4,7 @@
 
 	<select id="getList" resultType="kr.bit.entity.Board">
 		SELECT * FROM tblboard
-		ORDER BY boardGroup desc
+		ORDER BY boardGroup desc, boardSequence asc
 	</select>
 
 	<insert id="insert" parameterType="kr.bit.entity.Board">
@@ -29,6 +29,24 @@
 		boardLevel, boardAvailable)
 		VALUES(#{idx}, #{memID},#{title}, #{content},#{writer}, #{boardGroup},0,0,1)
 	</insert>
+	
+	<update id="replySeqUpdate" parameterType="kr.bit.entity.Board">
+		UPDATE tblBoard
+		SET boardSequence = boardSequence +1
+		WHERE boardGroup = #{boardGroup} AND boardSequence > #{boardSequence}
+	</update>
+	
+	<insert id="replyInsert" parameterType="kr.bit.entity.Board">
+		<selectKey keyProperty="idx,boardGroup"
+			resultType="kr.bit.entity.Board" order="BEFORE">
+			SELECT IFNULL(MAX(idx)+1, 1) as idx
+			FROM tblBoard
+		</selectKey>
+		INSERT INTO
+		tblboard (idx, memID,title, content, writer,boardGroup, boardSequence,
+		boardLevel, boardAvailable)
+		VALUES(#{idx}, #{memID},#{title}, #{content},#{writer}, #{boardGroup},#{boardSequence},#{boardLevel},1)
+	</insert>
 
 	<select id="login" resultType="kr.bit.entity.Member"
 		parameterType="kr.bit.entity.Member">
@@ -45,7 +63,10 @@
 		UPDATE tblBoard SET title=#{title}, content=#{content} WHERE idx =#{idx}
 	</update>
 	
-	<delete id="delete">
-		DELETE FROM tblBoard WHERE idx=#{idx}
-	</delete>
+	<update id="delete">
+		UPDATE tblBoard set boardAvailable = 0 WHERE idx=#{idx}
+	</update>
+	
+	
+	
 </mapper>

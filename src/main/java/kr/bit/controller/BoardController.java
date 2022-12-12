@@ -73,4 +73,19 @@ public class BoardController {
 		boardService.remove(idx);
 		return "redirect:/board/list";
 	}
+	
+	@GetMapping(value="/reply")
+	public String reply(int idx, Model model) {
+		Board vo = boardService.read(idx);
+		model.addAttribute("vo", vo);
+		return "board/reply";
+	}
+	
+	@PostMapping(value="/reply")
+	public String reply(Board vo) {
+		
+		boardService.reply(vo);
+		return "redirect:/board/list";
+	}
+	
 }
