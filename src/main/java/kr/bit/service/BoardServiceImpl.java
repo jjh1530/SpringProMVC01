@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.bit.entity.Board;
+import kr.bit.entity.Criteria;
 import kr.bit.entity.Member;
 import kr.bit.mapper.BoardMapper;
 
@@ -16,8 +17,8 @@ public class BoardServiceImpl implements BoardService{
 	BoardMapper boardMapper;
 	
 	@Override
-	public List<Board> getList() {
-		return boardMapper.getList();
+	public List<Board> getList(Criteria cri) {
+		return boardMapper.getList(cri);
 	}
 	
 	@Override
@@ -65,5 +66,10 @@ public class BoardServiceImpl implements BoardService{
 		boardMapper.replySeqUpdate(parent);
 		//6. 답글 insert
 		boardMapper.replyInsert(vo);
+	}
+	
+	@Override
+	public int totalCount() {
+		return boardMapper.totalCount();
 	}
 }

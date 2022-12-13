@@ -3,11 +3,12 @@ package kr.bit.mapper;
 import java.util.List;
 
 import kr.bit.entity.Board;
+import kr.bit.entity.Criteria;
 import kr.bit.entity.Member;
 
 public interface BoardMapper {
 	
-	public List<Board> getList();
+	public List<Board> getList(Criteria cri);
 	
 	public void insert(Board vo);
 
@@ -24,4 +25,6 @@ public interface BoardMapper {
 	public void replySeqUpdate(Board parent);
 	
 	public void replyInsert(Board vo);
+	
+	public int totalCount();
 }

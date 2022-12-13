@@ -3,11 +3,14 @@ package kr.bit.service;
 import java.util.List;
 
 import kr.bit.entity.Board;
+import kr.bit.entity.Criteria;
 import kr.bit.entity.Member;
 
 public interface BoardService {
 
-	public List<Board> getList();
+	public List<Board> getList(Criteria cri);
+	
+	public int totalCount();
 	
 	public Member login(Member vo);
 	

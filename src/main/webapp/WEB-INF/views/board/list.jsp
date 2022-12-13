@@ -23,6 +23,14 @@
 		$("#regBtn").click(function(){
 			location.href="/board/register";
 		});
+		//페이지 번호 쿨릭시 이동 하기
+		var pageFrm=$("#pageFrm");
+		$(".paginate_button a").on("click", function(e){
+			e.preventDefault(); // a tag의 기능을 막는 부분
+			var page =$(this).attr("href"); // 페이지번호
+			pageFrm.find("#page").val(page);
+			pageFrm.submit(); //
+		});
 	});
 	
 	function checkModal(result) {
@@ -78,6 +86,7 @@
 		    			<th>작성일</th>
 		    			<th>조회수</th>
 	    			</tr>
+	    		</thead>
 	    		<c:forEach var="vo" items="${list }">	
 	    			<tr>
 		    			<td>${vo.idx }</td>
@@ -117,8 +126,37 @@
 	    			</td>
 	    		</tr>
 	    		</c:if>
-	    		</thead>
 	    	</table>
+	    	
+	    	<!-- 페이징 START -->
+		      <div style="text-align: center">
+			    <ul class="pagination">
+		      <!-- 이전처리 -->
+		      <c:if test="${pageMaker.prev}">
+		        <li class="paginate_button previous">
+		          <a href="${pageMaker.startPage-1}">◀</a>
+		        </li>
+		      </c:if>      
+		      <!-- 페이지번호 처리 -->
+		          <c:forEach var="pageNum" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
+			         <li class="paginate_button ${pageMaker.cri.page==pageNum ? 'active' : ''}"><a href="${pageNum}">${pageNum}</a></li>
+				  </c:forEach>    
+		      <!-- 다음처리 -->
+		      <c:if test="${pageMaker.next}">
+		        <li class="paginate_button next">
+		          <a href="${pageMaker.endPage+1}">▶</a>
+		        </li>
+		      </c:if> 
+		        </ul>
+		      </div>
+		      <!-- END -->
+    	<form id="pageFrm" action="/board/list" method="get">
+         <!-- 게시물 번호(idx)추가 -->         
+         <input type="hidden" id="page" name="page" value="${pageMaker.cri.page}"/>
+         <input type="hidden" name="perPageNum" value="${pageMaker.cri.perPageNum}"/>
+      </form>      
+	    	<!-- end -->
+	    	
 	    	<!-- 모달 -->
 	    	<div id="myModal" class="modal fade" role="dialog">
 			  <div class="modal-dialog">

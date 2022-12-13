@@ -2,9 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="kr.bit.mapper.BoardMapper">
 
-	<select id="getList" resultType="kr.bit.entity.Board">
+	<select id="getList" resultType="kr.bit.entity.Board" parameterType="kr.bit.entity.Criteria">
 		SELECT * FROM tblboard
 		ORDER BY boardGroup desc, boardSequence asc
+		limit #{pageStart}, #{perPageNum}
 	</select>
 
 	<insert id="insert" parameterType="kr.bit.entity.Board">
@@ -67,6 +68,9 @@
 		UPDATE tblBoard set boardAvailable = 0 WHERE idx=#{idx}
 	</update>
 	
+	<select id="totalCount" resultType="Integer">
+		select count(*) from tblBoard
+	</select>
 	
 	
 </mapper>

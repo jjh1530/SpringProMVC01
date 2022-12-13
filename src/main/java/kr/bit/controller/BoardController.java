@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.bit.entity.Board;
+import kr.bit.entity.Criteria;
+import kr.bit.entity.PageMaker;
 import kr.bit.service.BoardService;
 
 @Controller
@@ -22,11 +24,15 @@ public class BoardController {
 	BoardService boardService;
 	
 	@GetMapping(value="/list")
-	public String list(Model model) throws Exception {
+	public String list(Criteria cri, Model model) throws Exception {
 		
-		List<Board> list = boardService.getList();
+		List<Board> list = boardService.getList(cri);
 		model.addAttribute("list", list);
 		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(boardService.totalCount());
+		model.addAttribute("pageMaker", pageMaker);
 		return "board/list";
 	}
 	
