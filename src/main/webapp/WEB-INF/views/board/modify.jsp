@@ -14,6 +14,33 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script>
+$(document).ready(function(){
+	$("button").on("click",function(e){  //클릭된 버튼이 매개변수로 넘어감
+	var formData = $("#frm");
+	var btn=$(this).data("btn");   //클릭한 버튼의 data-btn 값
+	if (btn=='modify') {
+		formData.attr("action", "/board/modify");
+	}else if(btn=='remove') {
+		formData.find("#title").remove();
+		formData.find("#content").remove();
+		formData.find("#writer").remove();
+		formData.attr("action", "/board/remove");
+		formData.attr("method", "get");
+		
+	}else if(btn=='list') {
+		formData.find("#idx").remove();  //idx 불필요해 remove
+		formData.find("#title").remove();
+		formData.find("#content").remove();
+		formData.find("#writer").remove();
+		formData.attr("action", "/board/list");
+		formData.attr("method","get");
+	}
+	formData.submit();
+	
+	});
+});
+</script>
 </head>
 <body>
 	<div class="container">
@@ -21,7 +48,7 @@
 	  <div class="panel panel-default">
 	    <div class="panel-heading">Board</div>
 	    <div class="panel-body">
-	    	<form action="/board/modify" method="post">
+	    <form id="frm" method ="post" >
 			<table class="table table-bordered table-hover">
 	    			<tr>
 		    			<td>번호</td>
@@ -43,17 +70,19 @@
 	    			<tr>
 	    				<td colspan="2" style="text-align:center;">
 	    					<c:if test="${!empty mvo && mvo.memID eq vo.memID}">
-		    					<button type="submit" class="btn btn-sm btn-primary">수정</button>
-		    					<button type="button" class="btn btn-sm btn-warning" onclick="location.href='/board/remove?idx=${vo.idx}'">삭제</button>
+		    					<button data-btn="modify" type="button" class="btn btn-sm btn-primary">수정</button>
+		    					<button data-btn="remove" type="button" class="btn btn-sm btn-warning">삭제</button>
 	    					</c:if>
 	    					<c:if test="${empty mvo || mvo.memID ne vo.memID}">
 		    					<button disabled="disabled" type="submit" class="btn btn-sm btn-primary">수정</button>
-		    					<button disabled="disabled" type="button" class="btn btn-sm btn-warning" onclick="location.href='/board/remove?idx=${vo.idx}'">삭제</button>
+		    					<button disabled="disabled" type="button" class="btn btn-sm btn-warning">삭제</button>
 	    					</c:if>
-	    					<button type="button" class="btn btn-sm btn-info" onclick="location.href='/board/list'">목록</button>
+	    					<button data-btn="list" type="button" class="btn btn-sm btn-info" >목록</button>
 	    				</td>
 	    			</tr>
 	    	</table>
+	    		<input type="hidden" name="page" value="<c:out value='${cri.page}'/>"/>
+	    		<input type="hidden" name="perPageNum" value="<c:out value='${cri.perPageNum}'/>"/>
 	    	</form>
 		</div>
 	    <div class="panel-footer">스프2탄(답변형 게시판)</div>

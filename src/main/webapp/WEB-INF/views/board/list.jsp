@@ -31,6 +31,16 @@
 			pageFrm.find("#page").val(page);
 			pageFrm.submit(); //
 		});
+		//상세보기 클릭시 이동
+		$(".move").on("click",function(e){
+			e.preventDefault(); // a tag의 기능을 막는 부분
+    		var idx=$(this).attr("href");
+			var tag="<input type='hidden' name='idx' value='"+idx+"'/>"
+			pageFrm.append(tag);
+			pageFrm.attr("action","/board/get");
+			pageFrm.submit();
+		});
+	
 	});
 	
 	function checkModal(result) {
@@ -98,7 +108,7 @@
 		    			</c:if>
 		    			<c:if test="${vo.boardLevel > 0}">
 		    				<c:if test="${vo.boardAvailable >0 }">
-		    				<a href="/board/get?idx=${vo.idx}">[RE]<c:out value="${vo.title }"/></a>
+		    				<a class="move" href="${vo.idx}">[RE]<c:out value="${vo.title }"/></a>
 		    				</c:if>
 		    				<c:if test="${vo.boardAvailable ==0 }">
 		    					<a href="javascript:goMsg()">[RE]삭제된 게시글입니다.</a>
@@ -106,7 +116,7 @@
 		    			</c:if>
 		    			<c:if test="${vo.boardLevel == 0}">
 		    				<c:if test="${vo.boardAvailable >0 }">
-		    					<a href="/board/get?idx=${vo.idx}"><c:out value="${vo.title }"/></a>
+		    					<a class="move" href="${vo.idx}"><c:out value="${vo.title }"/></a>
 		    				</c:if>
 		    				<c:if test="${vo.boardAvailable ==0 }">
 		    					<a href="javascript:goMsg()">삭제된 게시글입니다.</a>

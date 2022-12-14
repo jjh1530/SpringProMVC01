@@ -74,6 +74,8 @@
 	    	</table>
 	    	<form id="frm" method ="get" >
 	    		<input type="hidden" id="idx" name="idx" value="<c:out value='${vo.idx }'/>"/>
+	    		<input type="hidden" name="page" value="<c:out value='${cri.page}'/>"/>
+	    		<input type="hidden" name="perPageNum" value="<c:out value='${cri.perPageNum}'/>"/>
 	    	</form>
 		</div>
 	    <div class="panel-footer">스프2탄(답변형 게시판)</div>
