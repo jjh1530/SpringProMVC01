@@ -8,7 +8,7 @@ public class PageMaker {
 	private int endPage; //끝 페이지 번호     10 20 페이지가 없을 시 20이 아닌 마지막 페이지로 조정
 	private boolean prev; //이전 버튼 (true, false)
 	private boolean next; //다음 버튼
-	private int displayPageNum = 3; //1 2 3 4 5 6 7 8 9 10
+	private int displayPageNum = 5; //1 2 3 4 5 6 7 8 9 10
 	//총 게시글의 수를 구하는 메서드
 	
 	public Criteria getCri() {

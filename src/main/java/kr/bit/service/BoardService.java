@@ -10,7 +10,7 @@ public interface BoardService {
 
 	public List<Board> getList(Criteria cri);
 	
-	public int totalCount();
+	public int totalCount(Criteria cri);
 	
 	public Member login(Member vo);
 	

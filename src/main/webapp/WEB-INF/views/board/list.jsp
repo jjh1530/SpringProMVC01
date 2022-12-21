@@ -137,7 +137,22 @@
 	    		</tr>
 	    		</c:if>
 	    	</table>
-	    	
+	    	<!-- 검색 -->
+	    	<div style="text-align: center;">
+	    	<form class="form-inline" action="/board/list" method="post">
+	    	  <div class="form-group">
+			      <select name="type" class="form-control">
+			        <option value="wrtier">이름</option>
+			        <option value="title">제목</option>
+			        <option value="content">내용</option>
+			      </select>
+			  </div>
+			  <div class="form-group">
+			    <input type="text" class="form-control" name="keyword">
+			  </div>
+			  <button type="submit" class="btn btn-success">검색</button>
+			</form>
+	    	</div>
 	    	<!-- 페이징 START -->
 		      <div style="text-align: center">
 			    <ul class="pagination">

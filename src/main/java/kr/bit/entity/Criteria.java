@@ -5,9 +5,13 @@ public class Criteria {
 	private int page; // 현재 페이지 번호
 	private int perPageNum; // 한 페이지에 보여줄 게시글 수
 	
+	//검색에 필요한 변수
+	private String type;
+	private String keyword;
+	
 	public Criteria() {
 		this.page =1;
-		this.perPageNum = 3;
+		this.perPageNum = 5;
 	}
 	
 	//현재 페이지 글의 시작번호
@@ -30,6 +34,22 @@ public class Criteria {
 
 	public void setPerPageNum(int perPageNum) {
 		this.perPageNum = perPageNum;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
 	}
 	
 	

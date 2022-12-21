@@ -24,18 +24,18 @@ public class BoardController {
 	@Autowired
 	BoardService boardService;
 	
-	@GetMapping(value="/list")
-	public String list(Criteria cri, Model model) throws Exception {
-		
-		List<Board> list = boardService.getList(cri);
-		model.addAttribute("list", list);
-		
-		PageMaker pageMaker = new PageMaker();
+	@RequestMapping("/list")
+	public String getList(Criteria cri, Model model) { // type, keyword
+		List<Board> list=boardService.getList(cri);
+		// 객체바인딩
+		model.addAttribute("list", list); // Model
+		// 페이징 처리에 필요한 부분
+		PageMaker pageMaker=new PageMaker();
 		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(boardService.totalCount());
-		model.addAttribute("pageMaker", pageMaker);
-		return "board/list";
-	}
+		pageMaker.setTotalCount(boardService.totalCount(cri));
+		model.addAttribute("pageMaker", pageMaker);		
+		return "board/list"; // View
+ 	}
 	
 	@GetMapping(value="/register")
 	public String register() {
