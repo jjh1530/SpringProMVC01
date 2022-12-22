@@ -38,6 +38,7 @@
 			var tag="<input type='hidden' name='idx' value='"+idx+"'/>"
 			pageFrm.append(tag);
 			pageFrm.attr("action","/board/get");
+			pageFrm.attr("method","get");
 			pageFrm.submit();
 		});
 	
@@ -142,13 +143,13 @@
 	    	<form class="form-inline" action="/board/list" method="post">
 	    	  <div class="form-group">
 			      <select name="type" class="form-control">
-			        <option value="wrtier">이름</option>
-			        <option value="title">제목</option>
-			        <option value="content">내용</option>
+			        <option value="writer" ${pageMaker.cri.type=='writer' ? 'selected' : '' }>이름</option>
+			        <option value="title" ${pageMaker.cri.type=='title' ? 'selected' : '' }>제목</option>
+			        <option value="content" ${pageMaker.cri.type=='content' ? 'selected' : '' }>내용</option>
 			      </select>
 			  </div>
 			  <div class="form-group">
-			    <input type="text" class="form-control" name="keyword">
+			    <input type="text" class="form-control" name="keyword" value="${pageMaker.cri.keyword }">
 			  </div>
 			  <button type="submit" class="btn btn-success">검색</button>
 			</form>
@@ -175,10 +176,12 @@
 		        </ul>
 		      </div>
 		      <!-- END -->
-    	<form id="pageFrm" action="/board/list" method="get">
+    	<form id="pageFrm" action="/board/list" method="post">
          <!-- 게시물 번호(idx)추가 -->         
          <input type="hidden" id="page" name="page" value="${pageMaker.cri.page}"/>
          <input type="hidden" name="perPageNum" value="${pageMaker.cri.perPageNum}"/>
+         <input type="hidden" name="type" value="${pageMaker.cri.type}"/>
+         <input type="hidden" name="keyword" value="${pageMaker.cri.keyword}"/>
       </form>      
 	    	<!-- end -->
 	    	

@@ -48,6 +48,8 @@ $(document).ready(function(){
 	    		<input type="hidden" name="perPageNum" value="<c:out value='${cri.perPageNum}'/>"/>
 				<input type="hidden" id="idx" name="idx" value="${vo.idx }"/>
 				<input type="hidden" id="memID" name="memID" value="${mvo.memID }">
+				<input type="hidden" name="type" value="<c:out value='${cri.type}'/>"/>
+	    		<input type="hidden" name="keyword" value="<c:out value='${cri.keyword}'/>"/>
 				<div class="form-group">
 					<label>제목</label>
 					<input type="text" id="title" name="title" id="title" class="form-control" value="<c:out value='${vo.title }'/>">
@@ -67,6 +69,8 @@ $(document).ready(function(){
 			<form id="frm1" method="get">
 				<input type="hidden" name="page" value="<c:out value='${cri.page}'/>"/>
 	    		<input type="hidden" name="perPageNum" value="<c:out value='${cri.perPageNum}'/>"/>
+				<input type="hidden" name="type" value="<c:out value='${cri.type}'/>"/>
+	    		<input type="hidden" name="keyword" value="<c:out value='${cri.keyword}'/>"/>
 			</form>
 		</div>
 	    <div class="panel-footer">스프2탄(답변형 게시판)</div>
